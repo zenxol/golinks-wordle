@@ -2,8 +2,17 @@ from fastapi import FastAPI, HTTPException
 from app.game import set_new_word, get_word, evaluate_guess
 from app.word_service import fetch_random_word, is_valid_word
 from app.models import GuessRequest, GuessResponse
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def health_check():
