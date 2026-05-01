@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import Board from './components/Board'
 import Keyboard from './components/Keyboard'
 import { startNewGame, submitGuess, getAnswer } from './api'
+import Background from './components/Background'
 
 function App() {
   const [guesses, setGuesses] = useState([])
@@ -98,18 +99,43 @@ function App() {
   ]
 
     return (
-    <div className="flex flex-col items-center gap-6 p-8 min-h-screen bg-white">
-      <h1 className="text-3xl font-bold tracking-widest">WORDLE</h1>
-      {message && <p className="text-lg font-semibold">{message}</p>}
+    <div className="flex flex-col items-center gap-6 p-8 min-h-screen bg-transparent text-white font-sans">
+      <Background theme="dark" />
+
+      <div className="flex flex-col items-center gap-1 mt-2">
+        <h1 className="text-4xl font-black tracking-[0.3em] uppercase text-white drop-shadow-lg">Wordle</h1>
+        <div className="h-px w-48 bg-zinc-600" />
+      </div>
+
+      {message && (
+        <p className="text-sm font-semibold tracking-wide px-4 py-2 rounded-full bg-zinc-800 border border-zinc-700 text-zinc-100">
+          {message}
+        </p>
+      )}
+
       <Board guesses={displayGuesses} />
       <Keyboard onKey={handleKey} usedLetters={usedLetters} />
-      <button onClick={newGame} className="mt-4 px-6 py-2 bg-black text-white rounded font-bold">
-        New Game
-      </button>
-      <button onClick={toggleAnswer} className="px-4 py-2 bg-gray-200 text-gray-700 rounded text-sm">
-        {showAnswer ? 'Hide Answer' : 'Show Answer'}
-      </button>
-      {showAnswer && <p className="text-sm text-gray-500 uppercase tracking-widest">Answer: {revealedAnswer}</p>}
+
+      <div className="flex gap-3 mt-2">
+        <button
+          onClick={newGame}
+          className="px-6 py-2 bg-white text-black rounded-full font-bold text-sm tracking-wide hover:bg-zinc-200 active:scale-95 transition-all"
+        >
+          New Game
+        </button>
+        <button
+          onClick={toggleAnswer}
+          className="px-6 py-2 bg-zinc-800 border border-zinc-600 text-zinc-300 rounded-full text-sm font-semibold hover:bg-zinc-700 active:scale-95 transition-all"
+        >
+          {showAnswer ? 'Hide Answer' : 'Show Answer'}
+        </button>
+      </div>
+
+      {showAnswer && (
+        <p className="text-xs text-zinc-400 uppercase tracking-[0.2em]">
+          Answer: <span className="text-white font-bold">{revealedAnswer}</span>
+        </p>
+      )}
     </div>
   )
 }
