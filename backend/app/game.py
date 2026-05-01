@@ -3,10 +3,7 @@ number_attempts = 0
 
 def set_new_word(word):
     global secret_word
-    global number_attempts
-    secret_word = word
-    number_attempts = 0
-    
+    secret_word = word    
 
 def get_word():
     return secret_word
