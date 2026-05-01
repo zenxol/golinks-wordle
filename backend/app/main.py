@@ -4,7 +4,6 @@ from app.word_service import fetch_random_word, is_valid_word
 from app.models import GuessRequest, GuessResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-
 app = FastAPI()
 
 app.add_middleware(

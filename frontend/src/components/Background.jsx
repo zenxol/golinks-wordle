@@ -1,3 +1,5 @@
+// Particle effect adapted from 21st.dev (open-sourced), integrated with React Canvas
+// https://21st.dev/community/components/ruixenui/mouse-spark/default
 import { useEffect, useRef } from "react"
 
 function Background({ theme = "dark" }) {
